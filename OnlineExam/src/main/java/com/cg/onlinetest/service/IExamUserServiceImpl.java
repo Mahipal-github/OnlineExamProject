@@ -1,5 +1,5 @@
 package com.cg.onlinetest.service;
-//
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -7,40 +7,38 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
-//
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-//
-import com.cg.onlinetest.dao.ExamDaoImpl;
+
 import com.cg.onlinetest.dao.IExamDao;
 import com.cg.onlinetest.dto.Answer;
 import com.cg.onlinetest.entity.ExamUserAssign;
 import com.cg.onlinetest.entity.Questions;
 import com.cg.onlinetest.exceptions.ExamException;
 import com.cg.onlinetest.util.OnlineConstants;
-//
-//
+
 @Service
 @Transactional
 public class IExamUserServiceImpl implements IExamUserService {
 	@Autowired
 	private IExamDao dao;
-//	
+	
 	@Value("${maxQues}")
 	private int maxQues;
-//
-//	/**
-//	 * @author : Ambala Sai Prudhvi
-//	 * @Method : This method generates the questions from the getQuestions method in
-//	 *           dao layer
-//	 * @param  : testId parameter is passed as an argument so that the questions can
-//	 *           be generated for the assigned testId
-//	 * @return : It returns the list of Questions
-//	 * @throws : If testId is not valid it throws ExamException
-//	 */
-//
+
+	/**
+	 * @author : Ambala Sai Prudhvi
+	 * @Method : This method generates the questions from the getQuestions method in
+	 *           dao layer
+	 * @param  : testId parameter is passed as an argument so that the questions can
+	 *           be generated for the assigned testId
+	 * @return : It returns the list of Questions
+	 * @throws : If testId is not valid it throws ExamException
+	 */
+
 	@Override
 	public List<Questions> viewQuestionsForExamId(int examId) throws ExamException {
 	List<Questions> lst = new ArrayList<>();
@@ -51,22 +49,22 @@ public class IExamUserServiceImpl implements IExamUserService {
 		}
 		return lst;
 	}
-//
+
 	public Map<Integer, Questions> getQuestionsAsMap(int examId){
 		List<Questions> quesLst = dao.viewQuestionsForExamId(examId);
 		System.out.println("adfs");
 		Map<Integer, Questions> qmap = quesLst.stream().collect(Collectors.toMap(Questions::getQuestionId,q->q));
 		return qmap;
 	}
-//	/**
-//	 * @author : Ambala Sai Prudhvi
-//	 * @Method : This method checks the user answer against the actual answer and
-//	 *           evaluates the score
-//	 * @param  : umap pass the map having qid and answers which answered by the
-//	 *           user, qlist has the list of Questions
-//	 * @return : It returns the score for correct user answers
-//	 */
-//	
+	/**
+	 * @author : Ambala Sai Prudhvi
+	 * @Method : This method checks the user answer against the actual answer and
+	 *           evaluates the score
+	 * @param  : umap pass the map having qid and answers which answered by the
+	 *           user, qlist has the list of Questions
+	 * @return : It returns the score for correct user answers
+	 */
+	
 @Override
 	public int generateScore(List<Answer> answers, int examId, int userId) {
 //		

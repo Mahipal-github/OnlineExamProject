@@ -5,7 +5,7 @@ public class OnlineConstants {
 	public static final String EMPTY="";
 	public static final String ID_EXISTS ="ID alraedy Exists";
 	public static final int ZERO =0;
-	public static final int END_QUES_BOUND =10;
+	public static final int END_QUES_BOUND =30;
 	public static final int START_QUES_BOUND=1;
 	public static final String SCORE = "Your Score Is ";
 	public static final String USER_NOT_FOUND="User Not Found";
